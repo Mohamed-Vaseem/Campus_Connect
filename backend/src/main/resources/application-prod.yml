@@ -1,0 +1,14 @@
+# Generic production profile: works with MySQL, PostgreSQL or any JDBC-compatible database.
+# Set DB_URL to a full JDBC URL for whichever database you're using, e.g.:
+#   MySQL (self-hosted / docker-compose):
+#     jdbc:mysql://db:3306/campusconnect?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata
+#   PostgreSQL (Neon, Supabase, Render Postgres, etc. - see README "Deploying for free"):
+#     jdbc:postgresql://<host>:5432/<database>?sslmode=require
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/campusconnect?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata}
+    username: ${DB_USERNAME:campus}
+    password: ${DB_PASSWORD:campus}
+  jpa:
+    hibernate:
+      ddl-auto: update   # switch to 'validate' + Flyway migrations once the schema stabilises
